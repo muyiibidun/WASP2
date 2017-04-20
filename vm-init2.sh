@@ -1,5 +1,8 @@
 #!/bin/sh
 
+# set hostname 
+sudo echo “waspymq” > /etc/hostname
+
 # Install some packages
 sudo apt-get -y update
 sudo apt-get install -y python-dev
