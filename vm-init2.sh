@@ -17,7 +17,7 @@ sudo apt-get install -y python-pip
 
 # install rabbitmq package
 sudo apt-get install -y rabbitmq-server
-sudo apt-get install python-pika
+sudo apt-get install -y python-pika
 
 # stop and start
 # sudo rabbitmqctl stop
