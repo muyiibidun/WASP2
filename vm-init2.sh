@@ -21,5 +21,9 @@ sudo rabbitmq-server start &
 #running test hello-world program
 sudo apt-get install python-pika
 
+# prepare directory 
+mkdir /usr/local/rabbitmq-test
+cd /usr/local/rabbitmq-test
+
 #echo "Cloning repo with WASPY2"
 git clone https://github.com/muyiibidun/WASP2.git
