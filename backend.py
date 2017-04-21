@@ -1,17 +1,35 @@
 #!/usr/bin/env python
 import pika
+from optparse import OptionParser
 
-connection = pika.BlockingConnection(pika.ConnectionParameters(host='localhost'))
-channel = connection.channel()
-
-channel.queue_declare(queue='hello')
 
 def callback(ch, method, properties, body):
     print(" [x] Received %r" % body)
 
-channel.basic_consume(callback,
-                      queue='hello',
-                      no_ack=True)
+def receive(source="localhost"):
+	qname = "messages"
+	connection = pika.BlockingConnection(pika.ConnectionParameters(host=source))
+	channel = connection.channel()
 
-print(' [*] Waiting for messages. To exit press CTRL+C')
-channel.start_consuming()
+	channel.queue_declare(queue=qname)
+
+	channel.basic_consume(callback,
+	                      queue=qname,
+	                      no_ack=True)
+
+	print(' [*] Waiting for messages. To exit press CTRL+C')
+	channel.start_consuming()
+
+if __name__=="__main__":
+	parser = OptionParser()
+   	
+   	parser.add_option('-s', '--source', dest='source',
+                     help='SOURCE of message usually IP address of rabbitmq-server',
+                     default="localhost", metavar='SOURCE')
+   	
+   	(options, args) = parser.parse_args()
+   	
+   	if options.source:
+        receive(source=options.destination)
+   	else:
+        print("Syntax: 'python backend.py -h' | '--help' for help")
