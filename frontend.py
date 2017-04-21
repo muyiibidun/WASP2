@@ -10,7 +10,7 @@ def send(destination="localhost", message='Hello World!'):
 	channel.queue_declare(queue=qname)
 
 	channel.basic_publish(exchange='', routing_key=qname, body=message)
-	print(" [x] Sent %s"%messages)
+	print(" [x] Sent %s"%message)
 	connection.close()
 
 if __name__=="__main__":
