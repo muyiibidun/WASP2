@@ -1,8 +1,8 @@
 #!/bin/sh
 
 # set hostname 
-#sudo echo waspymq > /etc/hostname
-#sudo sed -i "s/localhost/waspymq/g" /etc/hosts
+sudo echo waspymq > /etc/hostname
+sudo sed -i "s/127.0.0.1 localhost/127.0.0.1 waspymq/g" /etc/hosts
 
 # insert rabbitmq APT repo to local source list
 echo 'deb http://www.rabbitmq.com/debian/ testing main' | sudo tee /etc/apt/sources.list.d/rabbitmq.list
