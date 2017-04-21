@@ -30,4 +30,5 @@ if __name__=="__main__":
    	if options.source:
    		receive(source=options.source)
    	else:
+   		#e.g. python backend.py -s $(hostname)
    		print("Syntax: 'python backend.py -h' | '--help' for help")
