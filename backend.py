@@ -28,6 +28,6 @@ if __name__=="__main__":
    	(options, args) = parser.parse_args()
 
    	if options.source:
-   		receive(source=options.destination)
+   		receive(source=options.source)
    	else:
    		print("Syntax: 'python backend.py -h' | '--help' for help")
