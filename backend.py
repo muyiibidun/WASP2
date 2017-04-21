@@ -13,9 +13,7 @@ def receive(source="localhost"):
 
 	channel.queue_declare(queue=qname)
 
-	channel.basic_consume(callback,
-	                      queue=qname,
-	                      no_ack=True)
+	channel.basic_consume(callback, queue=qname, no_ack=True)
 
 	print(' [*] Waiting for messages. To exit press CTRL+C')
 	channel.start_consuming()
@@ -28,8 +26,8 @@ if __name__=="__main__":
                      default="localhost", metavar='SOURCE')
    	
    	(options, args) = parser.parse_args()
-   	
+
    	if options.source:
-        receive(source=options.destination)
+   		receive(source=options.destination)
    	else:
-        print("Syntax: 'python backend.py -h' | '--help' for help")
+   		print("Syntax: 'python backend.py -h' | '--help' for help")
