@@ -15,7 +15,7 @@ class Manager:
 
 		parser = SafeConfigParser()
 		try:
-    		parser.read("credentials.txt")
+			parser.read("credentials.txt")
 		except IOError:
 			print("Credential file missing")
 			sys.exit()
