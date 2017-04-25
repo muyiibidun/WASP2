@@ -30,4 +30,6 @@ if __name__=="__main__":
    	if options.destination and options.message:
    		send(destination=options.destination , message=options.message)
    	else:
+   		#e.g. python frontend.py -d $(hostname) -m "Hello World"
    		print("Syntax: 'python frontend.py -h' | '--help' for help")
+
