@@ -1,34 +1,39 @@
 #!/usr/bin/env python
 import pika
 from optparse import OptionParser
+import ConfigParser
 
 
 def callback(ch, method, properties, body):
-    print(" [x] Received %r" % body)
+	print(" [x] Received %r" % body)
 
-def receive(source="localhost"):
-	qname = "messages"
-	connection = pika.BlockingConnection(pika.ConnectionParameters(host=source))
+def receive(connection_info=None):
+	qname = "wasp"
+	credentials = pika.PlainCredentials(connection_info["username"], connection_info["password"])
+	connection = pika.BlockingConnection(pika.ConnectionParameters(connection_info["server"],connection_info["port"],'/',credentials))
 	channel = connection.channel()
 
 	channel.queue_declare(queue=qname)
-
 	channel.basic_consume(callback, queue=qname, no_ack=True)
-
 	print(' [*] Waiting for messages. To exit press CTRL+C')
 	channel.start_consuming()
 
+
 if __name__=="__main__":
 	parser = OptionParser()
-   	
-   	parser.add_option('-s', '--source', dest='source',
-                     help='SOURCE of message usually IP address of rabbitmq-server',
-                     default="localhost", metavar='SOURCE')
-   	
-   	(options, args) = parser.parse_args()
+	parser.add_option('-c', '--credential', dest='credentialFile', help='Path to CREDENTIAL file', metavar='CREDENTIALFILE')
+	
+	(options, args) = parser.parse_args()
+	if options.credentialFile:
+		config = ConfigParser.RawConfigParser()
+		config.read(options.credentialFile)
+		connection = {}
+		connection["server"] = config.get('rabbit', 'server')
+		connection["port"] = int(config.get('rabbit', 'port'))
+		connection["username"] = config.get('user1', 'username')
+		connection["password"] = config.get('user1', 'password')
+		receive(connection_info=connection)
+	else:
+		#e.g. python receiver.py -c credentials.txt
+		print("Syntax: 'python receiver.py -h' | '--help' for help")
 
-   	if options.source:
-   		receive(source=options.source)
-   	else:
-   		#e.g. python backend.py -s $(hostname)
-   		print("Syntax: 'python backend.py -h' | '--help' for help")
