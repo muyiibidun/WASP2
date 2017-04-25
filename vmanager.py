@@ -67,7 +67,7 @@ class Manager:
 			print ("server '%s' does not exist"%vm)
 		return
 
-    def get_IPs(self):
+	def get_IPs(self):
 		ip_list=self.nova.floating_ips.list()
 		for ip in ip_list:
 			#if ip.instance_id
