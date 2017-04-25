@@ -10,8 +10,8 @@ def receive(connection_info=None):
     qname = "wasp"
     credentials = pika.PlainCredentials(connection_info["username"], connection_info["password"])
     connection = pika.BlockingConnection(pika.ConnectionParameters(connection_info["server"],connection_info["port"],'/',credentials))
-
     channel = connection.channel()
+
 	channel.queue_declare(queue=qname)
 	channel.basic_consume(callback, queue=qname, no_ack=True)
     print(' [*] Waiting for messages. To exit press CTRL+C')
@@ -29,8 +29,8 @@ if __name__=="__main__":
 		connection = {}
 		connection["server"] = config.get('rabbit', 'server')
 		connection["port"] = int(config.get('rabbit', 'port'))
-		connection["username"]=config.get('user1', 'username')
-		connection["password"]=config.get('user1', 'password')
+		connection["username"] = config.get('user1', 'username')
+		connection["password"] = config.get('user1', 'password')
 		receiver(connection_info=connection)
     else:
         #e.g. python receiver.py -c credentials.txt
