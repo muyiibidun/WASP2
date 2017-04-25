@@ -20,28 +20,28 @@ def send(connection_info=None, message=""):
 if __name__=="__main__":
 	parser = OptionParser()
 
-   	parser.add_option('-c', '--credential', dest='credentialFile',
-                     help='Path to CREDENTIAL file', metavar='CREDENTIALFILE')
+	parser.add_option('-c', '--credential', dest='credentialFile',
+                  help='Path to CREDENTIAL file', metavar='CREDENTIALFILE')
 
-   	parser.add_option('-m', '--message', dest='message',
-                     help='MESSAGE to send',
-                     default="Hello World!", metavar='MESSAGE')
-   	
-   	(options, args) = parser.parse_args()
-   	
+	parser.add_option('-m', '--message', dest='message',
+                  help='MESSAGE to send',
+                  default="Hello World!", metavar='MESSAGE')
+	
+	(options, args) = parser.parse_args()
+	
 
-   	if options.credentialFile and options.message:
-   		config = ConfigParser.RawConfigParser()
-         config.read(options.credentialFile)
+	if options.credentialFile and options.message:
+      config = ConfigParser.RawConfigParser()
+      config.read(options.credentialFile)
 
-         connection = {}
-         connection["server"] = config.get('rabbit', 'server');
-         connection["port"] = config.get('rabbit', 'port');
-         connection["username"]=config.get('user1', 'username');
-         connection["password"]=config.get('user1', 'password');
+      connection = {}
+      connection["server"] = config.get('rabbit', 'server');
+      connection["port"] = config.get('rabbit', 'port');
+      connection["username"]=config.get('user1', 'username');
+      connection["password"]=config.get('user1', 'password');
 
-   		send(connection_info=connection, message=options.message)
-   	else:
-   		#e.g. python sender.py -c credentials.txt -m "Hello World"
-   		print("Syntax: 'python sender.py -h' | '--help' for help")
+		send(connection_info=connection, message=options.message)
+	else:
+		#e.g. python sender.py -c credentials.txt -m "Hello World"
+		print("Syntax: 'python sender.py -h' | '--help' for help")
 
