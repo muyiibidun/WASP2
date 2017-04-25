@@ -32,12 +32,12 @@ if __name__=="__main__":
    	if options.credentialFile:
    		config = ConfigParser.RawConfigParser()
         config.read(options.credentialFile)
-        
+
         connection = {}
-        connection["server"] = config.get('rabbit', 'server');
-        connection["port"] = config.get('rabbit', 'port');
-        connection["username"]=config.get('user1', 'username');
-        connection["password"]=config.get('user1', 'password');
+        connection["server"] = config.get('rabbit', 'server')
+        connection["port"] = config.get('rabbit', 'port')
+        connection["username"]=config.get('user1', 'username')
+        connection["password"]=config.get('user1', 'password')
 		receiver(connection_info=connection)
 
    	else:
