@@ -32,7 +32,7 @@ if __name__=="__main__":
 		connection["port"] = int(config.get('rabbit', 'port'))
 		connection["username"] = config.get('user1', 'username')
 		connection["password"] = config.get('user1', 'password')
-		receiver(connection_info=connection)
+		receive(connection_info=connection)
 	else:
 		#e.g. python receiver.py -c credentials.txt
 		print("Syntax: 'python receiver.py -h' | '--help' for help")
