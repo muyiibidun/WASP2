@@ -31,7 +31,7 @@ if __name__=="__main__":
         config.read(options.credentialFile)
         connection = {}
         connection["server"] = config.get('rabbit', 'server')
-        connection["port"] = config.get('rabbit', 'port')
+        connection["port"] = int(config.get('rabbit', 'port'))
         connection["username"]=config.get('user1', 'username')
         connection["password"]=config.get('user1', 'password')
         send(connection_info=connection, message=options.message)
