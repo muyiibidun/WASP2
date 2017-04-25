@@ -9,7 +9,7 @@ from optparse import OptionParser
 class Manager:
 	DEFAULT_IMAGE = "Ubuntu 16.04 LTS"
 	DEFAULT_FLAVOUR = "m1.medium"
-    def __init__(self, pkey_id=None,start_script=None):
+	def __init__(self, pkey_id=None,start_script=None):
 		self.pkey_id = pkey_id
 		self.start_script = start_script
 
