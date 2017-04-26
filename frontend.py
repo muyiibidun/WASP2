@@ -36,7 +36,7 @@ def waspmq():
 @app.route("/v1/waspmq/<message>")
 def send(message):
 	messenger.send_to_queue(message)
-    return "Sent %s"%message
+	return "Sent %s"%message
 
 
 if __name__ == "__main__":
