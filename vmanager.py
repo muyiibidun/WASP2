@@ -117,7 +117,7 @@ if __name__=="__main__":
 			manager.start_script = options.initFile
 			manager.create(name=args[0])
 			time.sleep(1)
-			manager.get_IP(vm=args[0])
+			print(manager.get_IP(vm=args[0]))
 		if options.action == "describe":
 			manager.describe(vm=args[0])
 		if options.action == "show-ip":

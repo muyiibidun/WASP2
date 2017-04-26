@@ -22,18 +22,19 @@ def receive(connection_info=None):
 if __name__=="__main__":
 	parser = OptionParser()
 	parser.add_option('-c', '--credential', dest='credentialFile', help='Path to CREDENTIAL file', metavar='CREDENTIALFILE')
-	
 	(options, args) = parser.parse_args()
+	
 	if options.credentialFile:
 		config = ConfigParser.RawConfigParser()
 		config.read(options.credentialFile)
 		connection = {}
 		connection["server"] = config.get('rabbit', 'server')
 		connection["port"] = int(config.get('rabbit', 'port'))
-		connection["username"] = config.get('user1', 'username')
-		connection["password"] = config.get('user1', 'password')
+		connection["queue"] = config.get('rabbit', 'queue')
+		connection["username"] = config.get('rabbit', 'username')
+		connection["password"] = config.get('rabbit', 'password')
 		receive(connection_info=connection)
 	else:
-		#e.g. python receiver.py -c credentials.txt
-		print("Syntax: 'python receiver.py -h' | '--help' for help")
+		#e.g. python backend.py -c credentials.txt
+		print("Syntax: 'python backend.py -h' | '--help' for help")
 
