@@ -33,8 +33,8 @@ def index():
 def waspmq():
     return "WASPMQ Microservices\n"
 
-@app.route("/v1/waspmq/<message>", methods=["POST"])
-def send(message=None):
+@app.route("/v1/waspmq/<message>")
+def send(message):
 	messenger.send_to_queue(message)
 
 
